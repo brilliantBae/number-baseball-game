@@ -14,34 +14,31 @@ import user.User;
 @Controller
 public class UserController {
 	List<User> users = new ArrayList<>();
+	@GetMapping("/user/signUp")
+	public String show() {
+		return "user/form";
+	}
+	
 	@GetMapping("/users")
-	public String choose() {
-		return "users/index";
+	public String showList(Model model) {
+		model.addAttribute("users", users);
+		return "user/list";
 	}
-	@GetMapping("/users/signUp")
-	public String write() {
-		return "users/form";
-	}
-	@PostMapping("/users/create")
+	
+	@PostMapping("/user/create")
 	public String create(User user) {
 		users.add(user);
 		return "redirect:/users";
 	}
 	
-	@GetMapping("/users/list")
-	public String showList(Model model) {
-		model.addAttribute("users", users);
-		return "users/userList";
-	}
-	
-	@GetMapping("/users/{userId}")
+	@GetMapping("/user/{userId}")
 	public String showProfile(@PathVariable String userId, Model model) {
 		for(User user : users) {
 			if(user.getUserId().equals(userId)) {
 				model.addAttribute("user", user);
 			}
 		}
-		return "users/profile";
+		return "user/profile";
 	}
 	
 }
