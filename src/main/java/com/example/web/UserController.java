@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.web;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import user.User;
 @Controller
 public class UserController {
 	List<User> users = new ArrayList<>();
-	@GetMapping("/user/signUp")
+	@GetMapping("/signUp")
 	public String show() {
 		return "user/form";
 	}
